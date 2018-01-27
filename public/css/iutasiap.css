@@ -1,0 +1,19 @@
+body {
+    background-color: #cccccc52!important;
+}
+
+div.btn-group {
+    margin-top: 2px;
+}
+
+.nav-tabs > li {
+    float: none;
+    display: inline-block;
+    *display: inline; /* ie7 fix */
+    zoom: 1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs {
+    text-align: center;
+}
+
