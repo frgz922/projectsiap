@@ -59,7 +59,7 @@ class ProyectoController extends Controller
 
             $guardar = Storage::disk('dropbox')->putFileAs('/', $archivo, $nombreArchivo);
 
-            $Client = new Client(env('DROPBOX_TOKEN'));
+            $Client = new Client('v3GxD1o2VOAAAAAAAAAACo1Kuof24BkTESk79F8y09X5Xm1u-7Ar_CYepu9kmsoU');
             $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
             /*$proyecto = new Proyecto();

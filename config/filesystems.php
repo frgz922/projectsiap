@@ -57,7 +57,7 @@ return [
 
         'dropbox' => [
             'driver' => 'dropbox',
-            'token' => env('DROPBOX_TOKEN'),
+            'token' => 'v3GxD1o2VOAAAAAAAAAACo1Kuof24BkTESk79F8y09X5Xm1u-7Ar_CYepu9kmsoU',
         ],
 
 
