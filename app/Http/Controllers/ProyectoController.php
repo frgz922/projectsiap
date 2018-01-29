@@ -59,7 +59,7 @@ class ProyectoController extends Controller
 
             $guardar = Storage::disk('dropbox')->putFileAs('/', $archivo, $nombreArchivo);
 
-            $Client = new Client(env('DROPBOX_TOKEN'));
+            /*$Client = new Client(env('DROPBOX_TOKEN'));
             $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
             $proyecto = new Proyecto();
@@ -75,18 +75,18 @@ class ProyectoController extends Controller
 
             $proyecto->save();
 
-            $proyecto->guardar = $guardar;
+            $proyecto->guardar = $guardar;*/
 
         }
 
-        $success = true;
+        /*$success = true;
         $response = array(
             'success' => $success,
             'response' => $proyecto
         );
-        return $response;
+        return $response;*/
 
-//        return $link['url'];
+        return $guardar;
     }
 
     public function editarProyecto(Request $request)
