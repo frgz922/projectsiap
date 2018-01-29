@@ -55,6 +55,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'token' => env('DROPBOX_TOKEN'),
+        ],
+
+
         'uploads' => [
             'driver' => 'local',
             'root'   => public_path() . '/storage',

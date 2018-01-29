@@ -36,10 +36,6 @@ class sendFile extends Mailable
         return $this->view('emails.emailFile')
             ->subject('Trabajo especial de Grado Solicitado: '.$this->nombre)
             ->from('iutasiap@gmail.com', 'IUTA SIAP')
-            ->with(['nombre' => $this->nombre])
-            ->attachData($this->url, $this->nombre, [
-//                'mime' => 'application/'.$this->extension,
-                'mime' => 'application/'.$this->extension,
-            ]);
+            ->with(['nombre' => $this->nombre, 'url' => $this->url]);
     }
 }

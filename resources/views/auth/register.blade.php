@@ -69,7 +69,6 @@
                                                 title="Seleccione" data-size="5" style="    margin-top: 2px;" name="rol"
                                                 id="rol">
                                             <option disabled="">Seleccione</option>
-                                            <option value="1" {{ old('rol') == 1 ? 'selected' : ''  }}>Administrador</option>
                                             <option value="2" {{ old('rol') == 2 ? 'selected' : ''  }}>Coordinador</option>
                                         </select>
 

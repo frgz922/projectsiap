@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Dropbox\Client;
 
 class ProyectoController extends Controller
 {
@@ -54,24 +55,25 @@ class ProyectoController extends Controller
         } else {
             $archivo = $request->file('archivo');
 
-            $directorio = Carrera::find(Auth::user()->carrera_id);
+            $nombreArchivo = preg_replace('/\s+/', '', $archivo->getClientOriginalName());
 
+            $guardar = Storage::disk('dropbox')->putFileAs('/', $archivo, $nombreArchivo);
+
+            $Client = new Client(env('DROPBOX_TOKEN'));
+            $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
             $proyecto = new Proyecto();
-
 
             $proyecto->nombre = $data['nombre'];
             $proyecto->carrera_id = Auth::user()->carrera_id;
             $proyecto->usuario_id = Auth::id();
             $proyecto->categoria_id = $data['categoria'];
+            $proyecto->archivo = $link['url'];
             $proyecto->fecha = Carbon::now();
-            $proyecto->nombre_archivo = preg_replace('/\s+/', '', $archivo->getClientOriginalName());;
+            $proyecto->nombre_archivo = $nombreArchivo;
             $proyecto->autores = $data['autores'];
 
             $proyecto->save();
-
-
-            $guardar = Storage::disk('uploads')->putFileAs('/', $archivo, preg_replace('/\s+/', '', $archivo->getClientOriginalName()));
 
             $proyecto->guardar = $guardar;
 
@@ -83,7 +85,8 @@ class ProyectoController extends Controller
             'response' => $proyecto
         );
         return $response;
-//        return $request->file('archivo-0')->getClientOriginalName();
+
+//        return $link['url'];
     }
 
     public function editarProyecto(Request $request)
@@ -103,19 +106,25 @@ class ProyectoController extends Controller
 
             $proyecto = Proyecto::find($data['id']);
 
-            Storage::disk('uploads')->delete($proyecto->nombre_archivo);
+            Storage::disk('dropbox')->delete($proyecto->nombre_archivo);
+
+            $nombreArchivo = preg_replace('/\s+/', '', $archivo->getClientOriginalName());
+
+            $guardar = Storage::disk('dropbox')->putFileAs('/', $archivo, $nombreArchivo);
+
+            $Client = new Client(env('DROPBOX_TOKEN'));
+            $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
             $proyecto->nombre = $data['nombre'];
             $proyecto->carrera_id = Auth::user()->carrera_id;
             $proyecto->usuario_id = Auth::id();
             $proyecto->categoria_id = $data['categoria'];
             $proyecto->fecha = Carbon::now();
-            $proyecto->nombre_archivo = preg_replace('/\s+/', '', $archivo->getClientOriginalName());
+            $proyecto->archivo = $link['url'];
+            $proyecto->nombre_archivo = $nombreArchivo;
             $proyecto->autores = $data['autores'];
 
             $proyecto->save();
-
-            $guardar = Storage::disk('uploads')->putFileAs('/',$archivo, preg_replace('/\s+/', '', $archivo->getClientOriginalName()));
 
             $proyecto->guardar = $guardar;
 
@@ -135,7 +144,7 @@ class ProyectoController extends Controller
 
         $proyecto = Proyecto::find($request->id);
 
-        Storage::disk('uploads')->delete($proyecto->nombre_archivo);
+        Storage::disk('dropbox')->delete($proyecto->nombre_archivo);
 
         if ($proyecto->delete()) {
             $msj = 'Registro eliminado con éxito.';
@@ -174,7 +183,11 @@ class ProyectoController extends Controller
 
         $proyecto = Proyecto::find($request->id);
 
-        $url = Storage::disk('uploads')->get($proyecto->nombre_archivo);
+        $url = $proyecto->archivo;
+        $extension = \File::extension($proyecto->nombre_archivo);
+
+
+//        $link = $Client->listSharedLinks($proyecto->nombre_archivo);
         $extension = \File::extension($proyecto->nombre_archivo);
 
         $extension = $extension == 'pdf' ? 'pdf' : 'msword';
@@ -195,7 +208,7 @@ class ProyectoController extends Controller
         );
         return $response;
 
-//        return array('p' => $proyecto, 'u' => $extension);
+//        return array('p' => $link, 't' => $extension);
     }
 
     public function filterProyectos(Request $request)

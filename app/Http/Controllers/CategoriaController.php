@@ -80,6 +80,6 @@ class CategoriaController extends Controller
     public function pruebas(Request $request) {
 //        $categoria = Storage::disk('local')->put('Informatica/file.txt', 'Contents');
         $proyecto = Proyecto::find(1);
-        return response()->json($proyecto->nombre_archivo);
+        return response()->json($proyecto->archivo);
     }
 }

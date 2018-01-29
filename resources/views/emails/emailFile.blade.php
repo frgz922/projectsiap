@@ -8,6 +8,14 @@
     <title>Proyecto {{ $nombre }}</title>
 </head>
 <body>
-Abajo encontrarás adjunto el Trabajo Especial de Grado <b>{{ $nombre }}</b> en digital solicitado.
+<p>
+    Abajo encontrarás la URL para visualizar el archivo en Dropbox del Trabajo especial de Grado: <b>{{ $nombre }}</b>.
+</p>
+<p>
+    Tendrás la opción de visualizarlo directamente en Dropbox, añadirlo a tu cuenta personal de Dropbox o descargarlo.
+</p>
+<p>
+    <a href="{{ $url }}" target="_blank">{{ $url }}</a>
+</p>
 </body>
 </html>

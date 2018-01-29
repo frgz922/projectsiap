@@ -97,7 +97,7 @@
                                                             onclick="proyectoPorID({{ $proyecto['id'] }})">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <a href="{{ env('APP_URL').'/storage/'.$proyecto['nombre_archivo'] }}"
+                                                    <a href="{{ $proyecto['archivo'] }}"
                                                        type="button" rel="tooltip" title="Ver Archivo"
                                                        class="btn btn-success btn-simple btn-xs" target="_blank">
                                                         <i class="fa fa-eye"></i>

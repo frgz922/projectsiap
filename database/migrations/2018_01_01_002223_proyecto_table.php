@@ -16,10 +16,10 @@ class ProyectoTable extends Migration
         Schema::create('proyecto', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->boolean('digital');
             $table->date('fecha');
             $table->string('nombre_archivo');
             $table->text('autores');
+            $table->text('archivo');
             $table->integer('carrera_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
             $table->integer('categoria_id')->unsigned();

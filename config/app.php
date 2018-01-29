@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laraveles\Spanish\SpanishServiceProvider::class,
+        BC\Laravel\DropboxDriver\ServiceProvider::class,
 
         /*
          * Package Service Providers...
