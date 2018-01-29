@@ -59,10 +59,10 @@ class ProyectoController extends Controller
 
             $guardar = Storage::disk('dropbox')->putFileAs('/', $archivo, $nombreArchivo);
 
-            /*$Client = new Client(env('DROPBOX_TOKEN'));
+            $Client = new Client(env('DROPBOX_TOKEN'));
             $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
-            $proyecto = new Proyecto();
+            /*$proyecto = new Proyecto();
 
             $proyecto->nombre = $data['nombre'];
             $proyecto->carrera_id = Auth::user()->carrera_id;
@@ -86,7 +86,7 @@ class ProyectoController extends Controller
         );
         return $response;*/
 
-        return $guardar;
+        return $link;
     }
 
     public function editarProyecto(Request $request)
