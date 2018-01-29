@@ -62,7 +62,7 @@ class ProyectoController extends Controller
             $Client = new Client(getenv("DROPBOXTOKEN"));
             $link = $Client->createSharedLinkWithSettings($nombreArchivo, array('requested_visibility' => 'public'));
 
-            /*$proyecto = new Proyecto();
+            $proyecto = new Proyecto();
 
             $proyecto->nombre = $data['nombre'];
             $proyecto->carrera_id = Auth::user()->carrera_id;
@@ -75,18 +75,18 @@ class ProyectoController extends Controller
 
             $proyecto->save();
 
-            $proyecto->guardar = $guardar;*/
+            $proyecto->guardar = $guardar;
 
         }
 
-        /*$success = true;
+        $success = true;
         $response = array(
             'success' => $success,
             'response' => $proyecto
         );
-        return $response;*/
+        return $response;
 
-        return $link;
+//        return $link;
     }
 
     public function editarProyecto(Request $request)

@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => getenv('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => getenv('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => getenv('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => getenv('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => getenv('MAIL_FROM_NAME', 'Example'),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => getenv('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => getenv('MAIL_USERNAME'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => getenv('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
